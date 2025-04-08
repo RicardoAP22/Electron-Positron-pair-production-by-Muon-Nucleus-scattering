@@ -1,0 +1,19 @@
+#
+#/control/verbose 2
+#/run/verbose 2
+/tracking/verbose 2
+#
+#/run/setCut 1 mm
+#
+#/run/initialize
+#
+/process/inactivate muIoni
+/process/inactivate muBrems
+/process/inactivate muToMuonPairProd
+#
+/gun/particle mu+
+/gun/energy 160 GeV
+#
+#/run/printProgress 1000
+#
+#/run/beamOn 10000
