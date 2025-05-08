@@ -96,7 +96,7 @@ int main(int argc, char** argv)
   // ------- Initialisation
 
   G4int         verbose = 0;
-  G4int         stat = 1e8;
+  G4int         stat = 1e6;
   G4int         Z = 6;
   G4double      energy = 160.*GeV;
   G4Material*   mat = 0;
@@ -313,6 +313,24 @@ int main(int argc, char** argv)
       delete vdp[1];
       delete vdp[2];
     }
+    else{
+      v1 = vdp[0]->GetMomentumDirection();
+      v2 = vdp[1]->GetMomentumDirection();
+
+      Ee = (vdp[0]->GetKineticEnergy() + eMass)/1e3;
+      histo.Fill(4,Ee,1.0);
+      Ep = (vdp[1]->GetKineticEnergy() + eMass)/1e3;
+      histo.Fill(0,Ep,1.0);
+      coste = vdp[0]->GetMomentumDirection().z()/v1.mag();
+      te = std::acos(coste);
+      histo.Fill(8,te,1.0);
+      costp = vdp[1]->GetMomentumDirection().z()/v2.mag();
+      tp = std::acos(costp);
+      histo.Fill(10,tp,1.0);
+
+      delete vdp[0];
+      delete vdp[1];
+    }
   }
 
   timer->Stop();
@@ -330,30 +348,50 @@ int main(int argc, char** argv)
     vdp.clear();
     mpp.SampleSecondaries(&vdp,couple,&dParticle,0.0,energy);
     G4int N = (G4int) vdp.size();
-    
-    v1 = vdp[0]->GetMomentumDirection();
-    v2 = vdp[1]->GetMomentumDirection();
-    v3 = vdp[2]->GetMomentumDirection();
 
-    E = (vdp[2]->GetKineticEnergy() + particleMass)/1e3;
-    histo.Fill(3,E,1.0);
-    Ee = (vdp[0]->GetKineticEnergy() + eMass)/1e3;
-    histo.Fill(5,Ee,1.0);
-    Ep = (vdp[1]->GetKineticEnergy() + eMass)/1e3;
-    histo.Fill(1,Ep,1.0);
-    cost = vdp[2]->GetMomentumDirection().z()/v3.mag();
-    t = std::acos(cost);
-    histo.Fill(7,t,1.0);
-    coste = vdp[0]->GetMomentumDirection().z()/v1.mag();
-    te = std::acos(coste);
-    histo.Fill(9,te,1.0);
-    costp = vdp[1]->GetMomentumDirection().z()/v2.mag();
-    tp = std::acos(costp);
-    histo.Fill(11,tp,1.0);
-    
-    delete vdp[0];
-    delete vdp[1];
-    delete vdp[2];
+    if (N == 3) {
+      v1 = vdp[0]->GetMomentumDirection();
+      v2 = vdp[1]->GetMomentumDirection();
+      v3 = vdp[2]->GetMomentumDirection();
+
+      E = (vdp[2]->GetKineticEnergy() + particleMass)/1e3;
+      histo.Fill(3,E,1.0);
+      Ee = (vdp[0]->GetKineticEnergy() + eMass)/1e3;
+      histo.Fill(5,Ee,1.0);
+      Ep = (vdp[1]->GetKineticEnergy() + eMass)/1e3;
+      histo.Fill(1,Ep,1.0);
+      cost = vdp[2]->GetMomentumDirection().z()/v3.mag();
+      t = std::acos(cost);
+      histo.Fill(7,t,1.0);
+      coste = vdp[0]->GetMomentumDirection().z()/v1.mag();
+      te = std::acos(coste);
+      histo.Fill(9,te,1.0);
+      costp = vdp[1]->GetMomentumDirection().z()/v2.mag();
+      tp = std::acos(costp);
+      histo.Fill(11,tp,1.0);
+      
+      delete vdp[0];
+      delete vdp[1];
+      delete vdp[2];
+    }
+    else{
+      v1 = vdp[0]->GetMomentumDirection();
+      v2 = vdp[1]->GetMomentumDirection();
+
+      Ee = (vdp[0]->GetKineticEnergy() + eMass)/1e3;
+      histo.Fill(5,Ee,1.0);
+      Ep = (vdp[1]->GetKineticEnergy() + eMass)/1e3;
+      histo.Fill(1,Ep,1.0);
+      coste = vdp[0]->GetMomentumDirection().z()/v1.mag();
+      te = std::acos(coste);
+      histo.Fill(9,te,1.0);
+      costp = vdp[1]->GetMomentumDirection().z()/v2.mag();
+      tp = std::acos(costp);
+      histo.Fill(11,tp,1.0);
+
+      delete vdp[0];
+      delete vdp[1];
+    }
   }
   timer->Stop();
   G4cout << "MPP:  "  << *timer << G4endl;

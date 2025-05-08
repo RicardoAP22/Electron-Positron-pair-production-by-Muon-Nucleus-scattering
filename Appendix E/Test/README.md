@@ -4,6 +4,8 @@ To compile, make a folder named build and inside write "Cmake .." on your termin
 
 For windows, insert CmakeList.txt on CMAKE and then compile with Visual Studio. Open the executable.
 
+For full use of this Test you should modify G4RiGeMuPairProductionModel by removing coment line. Executing this test implies you wont be able to run the graphic simulation unlees your recoment class line.
+
 This test its for a GEANT4 class.
 
 1. Recent Developments in Geant4, J. Allison et al., Nucl. Instrum. Meth. A 835 (2016) 186-225

@@ -58,7 +58,7 @@
 #/vis/modeling/trajectories/drawByParticleID-0/set e+ yellow
 #
 # To superimpose all of the events from a given run:
-/vis/scene/endOfEventAction accumulate
+/vis/scene/endOfEventAction accumulate -1
 #
 # Re-establish auto refreshing and verbosity:
 /vis/viewer/set/autoRefresh true

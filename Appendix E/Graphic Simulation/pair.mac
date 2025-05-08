@@ -10,6 +10,7 @@
 /process/inactivate muIoni
 /process/inactivate muBrems
 /process/inactivate muToMuonPairProd
+/process/inactivate msc
 #
 /gun/particle mu+
 /gun/energy 160 GeV
